@@ -1,0 +1,5 @@
+parameters:
+    level: max
+    tmpDir: .phpstan-cache
+    paths:
+        - ../../src

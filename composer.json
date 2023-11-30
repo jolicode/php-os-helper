@@ -1,0 +1,41 @@
+{
+    "name": "jolicode/php-os-helper",
+    "description": "Helpers to detect the OS of the machine where PHP is running.",
+    "keywords": ["php", "os", "linux", "windows", "osx"],
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Loïck Piera",
+            "email": "pyrech@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "JoliCode\\PhpOsHelper\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JoliCode\\PhpOsHelper\\tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": ">=8.1"
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.1.19"
+        }
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^6.3.1"
+    },
+    "scripts": {
+        "test": "vendor/bin/simple-phpunit",
+        "cs": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --config tools/php-cs-fixer/.php-cs-fixer.php",
+        "cs-check": "tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --config tools/php-cs-fixer/.php-cs-fixer.php --dry-run",
+        "phpstan": "tools/phpstan/vendor/bin/phpstan analyse --configuration=tools/phpstan/phpstan.neon"
+    }
+}
