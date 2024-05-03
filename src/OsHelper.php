@@ -15,7 +15,7 @@ class OsHelper
 
     public static function isWindowsSubsystemForLinux(): bool
     {
-        return self::isUnix() && false !== mb_strpos(strtolower(php_uname()), 'microsoft');
+        return self::isUnix() && str_contains(strtolower(php_uname()), 'microsoft');
     }
 
     public static function isWindows(): bool
