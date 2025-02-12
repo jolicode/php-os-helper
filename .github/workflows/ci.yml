@@ -12,9 +12,9 @@ jobs:
         strategy:
             matrix:
                 php-versions:
-                    - '8.1'
                     - '8.2'
                     - '8.3'
+                    - '8.4'
 
         steps:
             - uses: actions/checkout@v3
@@ -30,17 +30,44 @@ jobs:
             - name: Install dependencies
               run: composer install --prefer-dist --no-progress
 
+            - name: Run tests
+              run: composer test
+
+    php-cs-fixer:
+        name: Run PHP CS Fixer
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.2'
+
             - name: Install PHP CS Fixer
               run: composer install --prefer-dist --no-progress --working-dir=tools/php-cs-fixer
 
             - name: Run PHP CS Fixer
               run: composer cs-check
 
+    phpstan:
+        name: Run PHPStan
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.4'
+
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress
+
             - name: Install PHPStan
               run: composer install --prefer-dist --no-progress --working-dir=tools/phpstan
 
             - name: Run PHPStan
               run: composer phpstan
-
-            - name: Run tests
-              run: composer test

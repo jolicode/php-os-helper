@@ -1,5 +1,9 @@
 {
     "require": {
-        "phpstan/phpstan": "^1.8"
+        "phpstan/phpstan": "^2.0.2"
+    },
+    "config": {
+        "bump-after-update": true,
+        "sort-packages": true
     }
 }

@@ -1,6 +1,5 @@
-.idea
-.phpunit.cache
-.php-cs-fixer.cache
 .phpstan-cache
-composer.lock
+/.php-cs-fixer.cache
+/.phpunit.cache
+/composer.lock
 vendor
