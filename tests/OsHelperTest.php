@@ -50,11 +50,26 @@ class OsHelperTest extends TestCase
             '6.2', // 8
             '6.3', // 8.1
             '6.4', // 10
-            '10', // 10 or 11, yeah microsoft is doing weird things
+            '10.0', // 10 or 11, yeah microsoft is doing weird things
         ];
         $isEightOrHigher = \in_array(php_uname('r'), $eightOrHigher, true);
 
         $this->assertSame($isEightOrHigher, OsHelper::isWindowsEightOrHigher());
+    }
+
+    public function testIsWindowsTenOrHigher()
+    {
+        if (!OsHelper::isWindows()) {
+            $this->markTestSkipped('Can only be run on Windows');
+        }
+
+        $tenOrHigher = [
+            '6.4', // 10
+            '10.0', // 10 or 11, yeah microsoft is doing weird things
+        ];
+        $isTenOrHigher = \in_array(php_uname('r'), $tenOrHigher, true);
+
+        $this->assertSame($isTenOrHigher, OsHelper::isWindowsTenOrHigher());
     }
 
     public function testIsMacOS()
@@ -82,7 +97,7 @@ class OsHelperTest extends TestCase
 
         $macOsVersion = OsHelper::getMacOSVersion();
 
-        $this->assertRegExp('#\d{1,2}\.\d{1,2}(\.\d{1,2})?#', $macOsVersion);
+        $this->assertMatchesRegularExpression('#\d{1,2}\.\d{1,2}(\.\d{1,2})?#', $macOsVersion);
         $this->assertSame($expectedMacOsVersion, $macOsVersion);
     }
 }
