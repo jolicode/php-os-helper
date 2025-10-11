@@ -4,6 +4,7 @@
 
 * Drop support of PHP 8.1
 * Add support of PHP 8.4
+* Add new helper `OsHelper::isWindowsTenOrHigher()`
 
 ## 0.2.0 (2024-10-02)
 

@@ -6,8 +6,8 @@ name: Continuous Integration
     pull_request: ~
 
 jobs:
-    ci:
-        name: Run the test suite
+    ci_linux:
+        name: Run the test suite on Linux
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -17,7 +17,7 @@ jobs:
                     - '8.4'
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
@@ -33,12 +33,52 @@ jobs:
             - name: Run tests
               run: composer test
 
+    ci_macos:
+        name: Run the test suite on macOS
+        runs-on: macos-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.4'
+
+            - name: Validate composer.json and composer.lock
+              run: composer validate --strict
+
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress
+
+            - name: Run tests
+              run: composer test
+
+    ci_windows:
+        name: Run the test suite on Windows
+        runs-on: windows-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.4'
+
+            - name: Validate composer.json and composer.lock
+              run: composer validate --strict
+
+            - name: Install dependencies
+              run: composer install --prefer-dist --no-progress
+
+            - name: Run tests
+              run: composer test
+
     php-cs-fixer:
         name: Run PHP CS Fixer
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
@@ -56,7 +96,7 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
 
             - name: Setup PHP
               uses: shivammathur/setup-php@v2
